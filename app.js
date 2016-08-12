@@ -6,6 +6,7 @@ app.use(bodyParser.urlencoded());
 
 const insertData = require('./routes/mongodb/insertRoom');
 const selectData = require('./routes/mongodb/selectRoom');
+const insertUser = require('./routes/userMongoDB/insertUser');
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -13,6 +14,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/insertRoom',insertData.save);
 
 app.get('/selectRoom',selectData.findAll);
+
+app.post('/insertUser', insertUser.insertUser);
 
 app.listen(8080, () => {
   console.log("==> 🌎  Listening on 8080 ");

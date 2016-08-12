@@ -1,8 +1,27 @@
 const SighUp = React.createClass({
+    getInitialState: function () {
+        return {
+            user: []
+        }
+    },
+
+    target: function () {
+        let username = $("input[name=username]").val();
+        let password = $("input[name=password]").val();
+        let surepassword = $("input[name=password-sure]").val();
+        if (surepassword === password) {
+            $.post('/insertUser', {name: username, password});
+        }
+        else {
+            alert("两次输入密码不相同，请重新输入");
+        }
+
+    },
+
     render: function () {
         return <div>
             <Title/>
-            <Bottom/>
+            <Bottom target={this.target}/>
         </div>
     }
 });
@@ -19,21 +38,23 @@ const Title = React.createClass({
 });
 
 const Bottom = React.createClass({
-    render:function () {
+    render: function () {
         return <div id="form-4" className="design">
             <h1 className="col-xs-offset-1 col-xs-10">注册</h1>
-            <p className="col-xs-offset-1 col-xs-10">
-                <input type="text" name="login" className="form-4" placeholder="用户名" required/>
-            </p>
-            <p className="col-xs-offset-1 col-xs-10">
-                <input type="password" name='password' placeholder="密码" required/>
-            </p>
-            <p className="col-xs-offset-1 col-xs-10">
-                <input type="password" name='password' placeholder="确认密码" required/>
-            </p>
+            <form>
+                <p className="col-xs-offset-1 col-xs-10">
+                    <input type="text" name="username" placeholder="用户名"/>
+                </p>
+                <p className="col-xs-offset-1 col-xs-10">
+                    <input type="password" name='password' placeholder="密码"/>
+                </p>
+                <p className="col-xs-offset-1 col-xs-10">
+                    <input type="password" name='password-sure' placeholder="确认密码"/>
+                </p>
 
+            </form>
             <p className="col-xs-offset-3 col-xs-5">
-                <input type="submit" name="submit" value="注册"/>
+                <button className="btn btn-primary" onClick={this.props.target}>注册</button>
             </p>
         </div>
     }
