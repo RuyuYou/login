@@ -74,7 +74,7 @@ const Top = React.createClass({
 
 const Bottom = React.createClass({
     render: function () {
-        return <div className="content design">
+        return <div className="design" id="content">
             <div className="col-xs-offset-2">
                 <input type="text" placeholder="用户名" required="" id="username"/>
             </div>
